@@ -1,0 +1,14 @@
+{
+  "name": "css-triggers",
+  "main": "./lib/main.coffee",
+  "version": "1.0.0",
+  "description": "Determine whether css triggers layout, paint, and composite",
+  "repository": "https://github.com/arkmuntasser/css-triggers",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
+}
