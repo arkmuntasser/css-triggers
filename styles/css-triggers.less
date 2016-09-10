@@ -7,10 +7,14 @@
 atom-text-editor::shadow .scroll-view .lines {
   left: 40px;
 }
+atom-text-editor::shadow .scroll-view .lines.no-css-triggers {
+  left: initial;
+}
 
 atom-text-editor::shadow .css.property-name.type {
   position: relative;
 }
+
 atom-text-editor::shadow .css-trigger-markers {
   position: relative;
   left: -40px;
@@ -18,18 +22,20 @@ atom-text-editor::shadow .css-trigger-markers {
   width: 40px;
   box-sizing: border-box;
 }
+atom-text-editor::shadow .css-trigger-markers.no-css-triggers {
+  display: none;
+}
+
 atom-text-editor::shadow .css-trigger-marker {
   position: absolute;;
   left: 5px;
   width: 30px;
   height: 8px;
 }
-
 atom-text-editor::shadow .css-trigger-marker:before,
 atom-text-editor::shadow .css-trigger-marker:after {
   content: "";
 }
-
 atom-text-editor::shadow .css-trigger-marker:before,
 atom-text-editor::shadow .css-trigger-marker span,
 atom-text-editor::shadow .css-trigger-marker:after {
@@ -39,7 +45,6 @@ atom-text-editor::shadow .css-trigger-marker:after {
   height: 8px;
   border-radius: 50%;
 }
-
 atom-text-editor::shadow .css-trigger-marker.layout:before { background-color: #9089e4; }
 atom-text-editor::shadow .css-trigger-marker.paint span { background-color: #90aa65; }
 atom-text-editor::shadow .css-trigger-marker.composite:after { background-color: #455f15; }

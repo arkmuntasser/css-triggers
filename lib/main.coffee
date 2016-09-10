@@ -5,6 +5,12 @@ module.exports = activate: (state) ->
     csstriggers = JSON.parse(res)
 
     atom.workspace.observeTextEditors (editor) ->
+      _editor = editor
+      view = $(atom.views.getView(_editor))
+      shadow = $(view[0].shadowRoot)
+
+      shadow.find('.scroll-view .lines').addClass('no-css-triggers')
+
       update = ->
         _editor = editor
         view = $(atom.views.getView(_editor))
@@ -13,7 +19,8 @@ module.exports = activate: (state) ->
         lineHeight = shadow.find('.line-number')[0].getBoundingClientRect().height
         hasMarkerContainer = shadow.find('.css-trigger-markers').length
         if hasMarkerContainer is 0
-          shadow.find('.scroll-view .lines').append('<div class="css-trigger-markers" />')
+          shadow.find('.scroll-view .lines').append('<div class="css-trigger-markers no-css-triggers" />')
+        shadow.find('.css-trigger-markers .css-trigger-marker').remove();
         trueHeight = shadow.find('.vertical-scrollbar .scrollbar-content').height()
         shadow.find('.css-trigger-markers').css({ height : trueHeight + 'px' })
         shadow.find('.css.property-name.support').each (i, el) ->
@@ -34,6 +41,10 @@ module.exports = activate: (state) ->
             isNewMarker = shadow.find('[data-css-trigger-line="' + line + '"]').length
             if(isNewMarker is 0)
               markers.push(marker)
+              shadow.find('.scroll-view .lines').removeClass('no-css-triggers')
+              shadow.find('.css-trigger-markers').removeClass('no-css-triggers')
+            else
+              shadow.find('[data-css-trigger-line="' + line + '"]').css({ top : top + 'px' })
         shadow.find('.css-trigger-markers').append(markers)
 
       scrollUpdate = ->
@@ -50,4 +61,7 @@ module.exports = activate: (state) ->
       editor.onDidChange ->
         update()
 
-      update()
+      editor.onDidStopChanging ->
+        update()
+
+      console.log(editor)
