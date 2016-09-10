@@ -9,8 +9,6 @@ module.exports = activate: (state) ->
       view = $(atom.views.getView(_editor))
       shadow = $(view[0].shadowRoot)
 
-      shadow.find('.scroll-view .lines').addClass('no-css-triggers')
-
       update = ->
         _editor = editor
         view = $(atom.views.getView(_editor))
@@ -41,7 +39,7 @@ module.exports = activate: (state) ->
             isNewMarker = shadow.find('[data-css-trigger-line="' + line + '"]').length
             if(isNewMarker is 0)
               markers.push(marker)
-              shadow.find('.scroll-view .lines').removeClass('no-css-triggers')
+              shadow.find('.scroll-view .lines').addClass('yes-css-triggers')
               shadow.find('.css-trigger-markers').removeClass('no-css-triggers')
             else
               shadow.find('[data-css-trigger-line="' + line + '"]').css({ top : top + 'px' })
