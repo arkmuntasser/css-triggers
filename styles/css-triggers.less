@@ -4,34 +4,42 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
+atom-text-editor::shadow .scroll-view .lines {
+  left: 40px;
+}
 
 atom-text-editor::shadow .css.property-name.type {
   position: relative;
-  padding-left: 10px;
 }
-atom-text-editor::shadow .csstrigger {
-  position: absolute;
-  left: -5px;
-  top: 0;
-  width: 10px;
-  height: 15px;
+atom-text-editor::shadow .css-trigger-markers {
+  position: relative;
+  left: -40px;
+  padding: 0 5px;
+  width: 40px;
+  box-sizing: border-box;
+}
+atom-text-editor::shadow .css-trigger-marker {
+  position: absolute;;
+  left: 5px;
+  width: 30px;
+  height: 8px;
 }
 
-atom-text-editor::shadow .csstrigger:before,
-atom-text-editor::shadow .csstrigger:after {
+atom-text-editor::shadow .css-trigger-marker:before,
+atom-text-editor::shadow .css-trigger-marker:after {
   content: "";
 }
 
-atom-text-editor::shadow .csstrigger:before,
-atom-text-editor::shadow .csstrigger span,
-atom-text-editor::shadow .csstrigger:after {
-  display: block;
-  margin-bottom: 2px;
-  width: 10px;
-  height: 3px;
-  border-radius: 2px;
+atom-text-editor::shadow .css-trigger-marker:before,
+atom-text-editor::shadow .css-trigger-marker span,
+atom-text-editor::shadow .css-trigger-marker:after {
+  display: inline-block;
+  margin-right: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
 }
 
-atom-text-editor::shadow .csstrigger.csstrigger-layout:before { background-color: #9089e4; }
-atom-text-editor::shadow .csstrigger.csstrigger-paint span { background-color: #90aa65; }
-atom-text-editor::shadow .csstrigger.csstrigger-composite:after { background-color: #455f15; }
+atom-text-editor::shadow .css-trigger-marker.layout:before { background-color: #9089e4; }
+atom-text-editor::shadow .css-trigger-marker.paint span { background-color: #90aa65; }
+atom-text-editor::shadow .css-trigger-marker.composite:after { background-color: #455f15; }

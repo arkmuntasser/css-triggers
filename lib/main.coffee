@@ -1,33 +1,53 @@
 $ = jQuery = require 'jquery'
 
 module.exports = activate: (state) ->
-  # Attach to editors
-  $.get "https://raw.githubusercontent.com/GoogleChrome/css-triggers/master/data/blink.json", (res) ->
+  $.get 'https://raw.githubusercontent.com/GoogleChrome/css-triggers/master/data/blink.json', (res) ->
     csstriggers = JSON.parse(res)
-    console.log(csstriggers)
+
     atom.workspace.observeTextEditors (editor) ->
-      _editor = editor
-      editor.onDidChange ->
-        console.log("change")
-        # Get Shadow DOM
+      update = ->
+        _editor = editor
         view = $(atom.views.getView(_editor))
         shadow = $(view[0].shadowRoot)
-        # HEX and RGB values
-        shadow.find(".css.property-name.type:not(.csstrigger-loaded)").each (i, el) ->
-          console.log($(this))
-          property = $(this).text().toLowerCase() + "-change"
-          details = csstriggers.properties[property]
-          console.log(details)
-          if details isnt undefined
-            console.log("here")
-            values = ""
-            if details.layout
-              values += "csstrigger-layout "
-            if details.paint
-              values += "csstrigger-paint "
-            if details.composite
-              values += "csstrigger-composite"
-            console.log(values)
-            console.log("final this", $(this))
-            $(this).html("<span class='csstrigger " + values + "'><span></span></span>" + $(this).text())
-            $(this).addClass("csstrigger-loaded")
+        markers = []
+        lineHeight = shadow.find('.line-number')[0].getBoundingClientRect().height
+        hasMarkerContainer = shadow.find('.css-trigger-markers').length
+        if hasMarkerContainer is 0
+          shadow.find('.scroll-view .lines').append('<div class="css-trigger-markers" />')
+        trueHeight = shadow.find('.vertical-scrollbar .scrollbar-content').height()
+        shadow.find('.css-trigger-markers').css({ height : trueHeight + 'px' })
+        shadow.find('.css.property-name.support').each (i, el) ->
+          line = $(this).closest('.line').attr('data-screen-row')
+          top = (parseInt(line)) * lineHeight
+          property = $(this).text().toLowerCase() + '-change'
+          triggers = csstriggers.properties[property]
+          scrollTop = editor.getScrollTop()
+          if triggers isnt undefined
+            classes = property + ' '
+            if triggers.layout
+              classes += 'layout '
+            if triggers.paint
+              classes += 'paint '
+            if triggers.composite
+              classes += 'composite'
+            marker = $('<div class="css-trigger-marker" data-css-trigger-line="' + line + '"><span></span></div>').addClass(classes).css({ top : top + 'px' })
+            isNewMarker = shadow.find('[data-css-trigger-line="' + line + '"]').length
+            if(isNewMarker is 0)
+              markers.push(marker)
+        shadow.find('.css-trigger-markers').append(markers)
+
+      scrollUpdate = ->
+        _editor = editor
+        view = $(atom.views.getView(_editor))
+        shadow = $(view[0].shadowRoot)
+        scrollTop = editor.getScrollTop()
+        update()
+        shadow.find('.css-trigger-markers').css({ 'transform' : 'translate3d(0,-' + scrollTop +  'px,0)' });
+
+      editor.onDidChangeScrollTop ->
+        scrollUpdate()
+
+      editor.onDidChange ->
+        update()
+
+      update()
