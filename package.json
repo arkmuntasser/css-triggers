@@ -1,8 +1,8 @@
 {
   "name": "css-triggers",
   "main": "./lib/main.coffee",
-  "version": "1.0.0",
-  "description": "Determine whether css triggers layout, paint, and composite",
+  "version": "0.5.0",
+  "description": "Determine whether css triggers layout, paint, and composite. https://csstriggers.com/ is a dependency.",
   "repository": "https://github.com/arkmuntasser/css-triggers",
   "license": "MIT",
   "engines": {
