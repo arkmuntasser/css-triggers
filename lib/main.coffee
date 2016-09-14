@@ -14,7 +14,7 @@ module.exports = activate: (state) ->
         view = $(atom.views.getView(_editor))
         shadow = $(view[0].shadowRoot)
         markers = []
-        lineHeight = shadow.find('.line-number')[0].getBoundingClientRect().height
+        lineHeight = if shadow.find('.line-number').length then shadow.find('.line-number')[0].getBoundingClientRect().height else 0
         hasMarkerContainer = shadow.find('.css-trigger-markers').length
         if hasMarkerContainer is 0
           shadow.find('.scroll-view .lines').append('<div class="css-trigger-markers no-css-triggers" />')
