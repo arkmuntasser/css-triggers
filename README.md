@@ -7,4 +7,5 @@ The extension is inspired and powered by [css-triggers](https://csstriggers.com)
 ## TODO
 * Add support for shorthand notation
 * Add onHover descriptions of trigger icons
+* Ignore declaration inside @media ()
 * Improve general performance
