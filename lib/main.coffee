@@ -21,7 +21,7 @@ module.exports = activate: (state) ->
         shadow.find('.css-trigger-markers .css-trigger-marker').remove();
         trueHeight = shadow.find('.vertical-scrollbar .scrollbar-content').height()
         shadow.find('.css-trigger-markers').css({ height : trueHeight + 'px' })
-        shadow.find('.css.property-name.support').each (i, el) ->
+        shadow.find('.css.property-name.support, .scss.property-name.support, .sass.property-name.support').each (i, el) ->
           line = $(this).closest('.line').attr('data-screen-row')
           top = (parseInt(line)) * lineHeight
           property = $(this).text().toLowerCase() + '-change'
