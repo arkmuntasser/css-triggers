@@ -61,5 +61,3 @@ module.exports = activate: (state) ->
 
       editor.onDidStopChanging ->
         update()
-
-      console.log(editor)
