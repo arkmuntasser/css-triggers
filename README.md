@@ -5,7 +5,5 @@ The extension is inspired and powered by [css-triggers](https://csstriggers.com)
 ![css-triggers in action](https://raw.githubusercontent.com/arkmuntasser/css-triggers/master/screenshot.png)
 
 ## TODO
-* Add support for shorthand notation
 * Add onHover descriptions of trigger icons
-* Ignore declaration inside @media ()
 * Improve general performance

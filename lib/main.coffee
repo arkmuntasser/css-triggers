@@ -47,6 +47,8 @@ module.exports = activate: (state) ->
                           property = 'border-bottom-style'
                         else if property is 'border-width'
                           property = 'border-bottom-width'
+                        else
+                          property += '-width'
               else if i is 'background'
                 if property is 'background'
                   property += '-color'
