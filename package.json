@@ -1,7 +1,7 @@
 {
   "name": "css-triggers",
   "main": "./lib/main.coffee",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Determine whether css triggers layout, paint, and composite.",
   "keywords": [
     "css",
