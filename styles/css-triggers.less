@@ -4,46 +4,38 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-atom-text-editor::shadow .scroll-view .lines.yes-css-triggers {
-  left: 40px;
-}
+atom-text-editor .scroll-view .lines.yes-css-triggers { left: 40px; }
 
-atom-text-editor::shadow .css.property-name.type,
-atom-text-editor::shadow .scss.property-name.type,
-atom-text-editor::shadow .sass.property-name.type {
-  position: relative;
-}
+atom-text-editor .syntax--css.syntax--property-name.syntax--type,
+atom-text-editor .syntax--scss.syntax--property-name.syntax--type,
+atom-text-editor .syntax--sass.syntax--property-name.syntax--type { position: relative; }
 
-atom-text-editor::shadow .css-trigger-markers {
+atom-text-editor .css-trigger-markers {
   position: relative;
   left: -40px;
   padding: 0 5px;
   width: 40px;
   box-sizing: border-box;
 }
-atom-text-editor::shadow .css-trigger-markers.no-css-triggers {
-  display: none;
-}
+atom-text-editor .css-trigger-markers.no-css-triggers { display: none; }
 
-atom-text-editor::shadow .css-trigger-marker {
-  position: absolute;;
+atom-text-editor .css-trigger-marker {
+  position: absolute;
   left: 5px;
   width: 30px;
   height: 8px;
 }
-atom-text-editor::shadow .css-trigger-marker:before,
-atom-text-editor::shadow .css-trigger-marker:after {
-  content: "";
-}
-atom-text-editor::shadow .css-trigger-marker:before,
-atom-text-editor::shadow .css-trigger-marker span,
-atom-text-editor::shadow .css-trigger-marker:after {
+atom-text-editor .css-trigger-marker:before,
+atom-text-editor .css-trigger-marker:after { content: ""; }
+atom-text-editor .css-trigger-marker:before,
+atom-text-editor .css-trigger-marker span,
+atom-text-editor .css-trigger-marker:after {
   display: inline-block;
   margin-right: 2px;
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
-atom-text-editor::shadow .css-trigger-marker.layout:before { background-color: #9089e4; }
-atom-text-editor::shadow .css-trigger-marker.paint span { background-color: #90aa65; }
-atom-text-editor::shadow .css-trigger-marker.composite:after { background-color: #455f15; }
+atom-text-editor .css-trigger-marker.layout:before { background-color: #9089e4; }
+atom-text-editor .css-trigger-marker.paint span { background-color: #90aa65; }
+atom-text-editor .css-trigger-marker.composite:after { background-color: #455f15; }

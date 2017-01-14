@@ -6,14 +6,16 @@ module.exports = activate: (state) ->
 
     atom.workspace.observeTextEditors (editor) ->
       _editor = editor
+      console.log('editor', editor)
       view = $(atom.views.getView(_editor))
-      shadow = $(view[0].shadowRoot)
+      console.log('view', view)
+      shadow = view
       shorthands = ['margin', 'padding', 'border', 'font', 'background', 'overflow', 'transform']
 
       update = ->
         _editor = editor
         view = $(atom.views.getView(_editor))
-        shadow = $(view[0].shadowRoot)
+        shadow = view
         markers = []
         lineHeight = if shadow.find('.line-number').length then shadow.find('.line-number')[0].getBoundingClientRect().height else 0
         hasMarkerContainer = shadow.find('.css-trigger-markers').length
@@ -22,7 +24,7 @@ module.exports = activate: (state) ->
         shadow.find('.css-trigger-markers .css-trigger-marker').remove()
         trueHeight = shadow.find('.vertical-scrollbar .scrollbar-content').height()
         shadow.find('.css-trigger-markers').css({ height : trueHeight + 'px' })
-        shadow.find('.css.property-name.support:not(.media), .scss.property-name.support:not(.media), .sass.property-name.support:not(.media)').each (i, el) ->
+        shadow.find('.syntax--css.syntax--property-name.syntax--support:not(.media), .syntax--scss.syntax--property-name.syntax--support:not(.media), .syntax--sass.syntax--property-name.syntax--support:not(.media)').each (i, el) ->
           line = $(this).closest('.line').attr('data-screen-row')
           top = (parseInt(line)) * lineHeight
           property = $(this).text().toLowerCase()
@@ -68,7 +70,7 @@ module.exports = activate: (state) ->
 
           key = property + '-change'
           triggers = csstriggers.properties[key]
-          scrollTop = editor.getScrollTop()
+          scrollTop = view.context.getScrollTop()
           if triggers isnt undefined
             classes = property + ' '
             if triggers.layout
@@ -90,12 +92,12 @@ module.exports = activate: (state) ->
       scrollUpdate = ->
         _editor = editor
         view = $(atom.views.getView(_editor))
-        shadow = $(view[0].shadowRoot)
-        scrollTop = editor.getScrollTop()
+        shadow = view
+        scrollTop = view.context.getScrollTop()
         update()
         shadow.find('.css-trigger-markers').css({ 'transform' : 'translate3d(0,-' + scrollTop +  'px,0)' });
 
-      editor.onDidChangeScrollTop ->
+      view.context.emitter.on 'did-change-scroll-top', ->
         scrollUpdate()
 
       editor.onDidChange ->
